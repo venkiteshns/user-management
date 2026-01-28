@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Dashboard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Cinzel for headers, Playfair for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --royal-gold: #D4AF37;
+            --royal-gold-dim: #aa8c2e;
+            --obsidian: #0a0a0a;
+            --charcoal: #1a1a1a;
+            --silk-gradient: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        body {
+            background-color: var(--obsidian);
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
+                url('https://www.transparenttextures.com/patterns/black-linen.png');
+            color: #e0e0e0;
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Prevent scrolling as requested */
+        }
+
+        .royal-container {
+            width: 100%;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .royal-card {
+            background: var(--silk-gradient);
+            border: 2px solid var(--royal-gold);
+            outline: 1px solid var(--royal-gold);
+            outline-offset: 4px;
+            padding: 2rem 2.5rem; /* Reduced padding */
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.1);
+            max-width: 500px; /* Slightly narrower */
+            width: 100%;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .royal-card::before {
+            content: "";
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            pointer-events: none;
+        }
+
+        .royal-header {
+            text-align: center;
+            margin-bottom: 1.5rem; /* Reduced margin */
+        }
+
+        .crest-icon {
+            font-size: 2.5rem; /* Reduced size */
+            color: var(--royal-gold);
+            margin-bottom: 0.2rem;
+            display: block;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--royal-gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 1.5rem; /* Reduced font size */
+            margin-bottom: 0.2rem;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #888;
+            letter-spacing: 1px;
+            font-size: 0.85rem; /* Reduced size */
+        }
+
+        .royal-divider {
+            height: 1px; /* Thinner line */
+            background: linear-gradient(90deg, transparent, var(--royal-gold), transparent);
+            margin: 1.5rem 0; /* Reduced margin */
+            position: relative;
+        }
+        
+        .royal-divider::after {
+            content: "◆";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--obsidian);
+            padding: 0 8px;
+            color: var(--royal-gold);
+            font-size: 0.7rem;
+        }
+
+        .info-group {
+            margin-bottom: 1.2rem; /* Reduced margin */
+        }
+
+        .info-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem; /* Reduced size */
+            color: var(--royal-gold-dim);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .info-value {
+            font-size: 1.1rem; /* Reduced size */
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            padding-bottom: 0.4rem;
+            word-break: break-all;
+            color: #f8f8f8;
+            font-weight: 400;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem; /* Reduced size */
+            border: 1px solid var(--royal-gold);
+            color: var(--royal-gold);
+            background: rgba(212, 175, 55, 0.05);
+            margin-top: 0.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1);
+        }
+
+        .btn-royal {
+            background: transparent;
+            border: 1px solid var(--royal-gold);
+            color: var(--royal-gold);
+            font-family: 'Cinzel', serif;
+            padding: 0.8rem 1.5rem; /* Reduced padding */
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            width: 100%;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.85rem;
+        }
+
+        .btn-royal:hover {
+            background: var(--royal-gold);
+            color: var(--obsidian);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Decorative Corners */
+        .corner {
+            position: absolute;
+            width: 25px; /* Smaller corners */
+            height: 25px;
+            border: 2px solid var(--royal-gold);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .top-left { top: -6px; left: -6px; border-right: none; border-bottom: none; }
+        .top-right { top: -6px; right: -6px; border-left: none; border-bottom: none; }
+        .bottom-left { bottom: -6px; left: -6px; border-right: none; border-top: none; }
+        .bottom-right { bottom: -6px; right: -6px; border-left: none; border-top: none; }
+
+        .footer-seal {
+            text-align: center;
+            margin-top: 1.5rem; /* Reduced margin */
+            opacity: 0.4;
+        }
+
+        .footer-seal small {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--royal-gold);
+        }
+
+        @media (max-width: 576px) {
+            .royal-card {
+                padding: 1.8rem 1.5rem;
+                max-width: 90%;
+            }
+            h1 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="royal-container">
+        <main class="royal-card">
+            <!-- Decorative Corners -->
+            <div class="corner top-left"></div>
+            <div class="corner top-right"></div>
+            <div class="corner bottom-left"></div>
+            <div class="corner bottom-right"></div>
+
+            <header class="royal-header">
+                <span class="crest-icon">⚜</span>
+                <h1>Royal Profile</h1>
+                <div class="subtitle">Imperial High Chamberlain</div>
+            </header>
+
+            <div class="royal-divider"></div>
+
+            <section class="row">
+                <div class="col-12 info-group">
+                    <label class="info-label">Identity</label>
+                    <div class="info-value"><%=username %></div>
+                </div>
+
+                <div class="col-12 info-group">
+                    <label class="info-label">Imperial Despatch</label>
+                    <div class="info-value"><%=email %></div>
+                </div>
+
+                <div class="col-12 info-group">
+                    <label class="info-label">Protocol Rank</label>
+                    <div>
+                        <span class="role-badge">Imperial User</span>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="mt-2">
+                <a href="/logout"><button class="btn-royal">LOG OUT</button></a>
+                <div class="footer-seal">
+                    <small>© 1824 THE IMPERIAL ARCHIVES</small>
+                </div>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

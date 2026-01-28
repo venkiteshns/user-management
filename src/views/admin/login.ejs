@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Entry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --royal-crimson: #a33030;
+            --text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            --royal-glow: 0 0 30px rgba(212, 175, 55, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            background-color: var(--black);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--gold);
+            overflow: hidden; /* No scrolling allowed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Royal Background Effects */
+        .bg-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+            z-index: -1;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+        }
+
+        /* Decorative Corners */
+        .corner {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            pointer-events: none;
+            z-index: 5;
+        }
+        .top-left { top: 20px; left: 20px; border-right: none; border-bottom: none; border-top-left-radius: 8px; }
+        .top-right { top: 20px; right: 20px; border-left: none; border-bottom: none; border-top-right-radius: 8px; }
+        .bottom-left { bottom: 20px; left: 20px; border-right: none; border-top: none; border-bottom-left-radius: 8px; }
+        .bottom-right { bottom: 20px; right: 20px; border-left: none; border-top: none; border-bottom-right-radius: 8px; }
+
+        /* Main Form Container */
+        .signup-card {
+            background-color: #0f0f0f;
+            border: 2px solid var(--gold);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            box-shadow: var(--royal-glow);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .signup-card h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            color: var(--gold);
+            text-shadow: var(--text-shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: rgba(212, 175, 55, 0.7);
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.8rem 1rem;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .form-group select option {
+            background: var(--black);
+            color: var(--gold);
+        }
+
+        /* Custom Submit Button */
+        .btn-ascend {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border: none;
+            color: var(--black);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            padding: 1.2rem;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-ascend:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .btn-ascend:active {
+            transform: scale(0.98);
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.75rem;
+            opacity: 0.5;
+            letter-spacing: 0.05em;
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 500px) {
+            .signup-card {
+                padding: 2rem;
+                margin: 1rem;
+                border-width: 1px;
+            }
+            .corner { width: 60px; height: 60px; }
+            .signup-card h1 { font-size: 1.8rem; }
+        }
+         .royal-link {
+            display: block;
+            margin-top: 0.8rem;
+            color: var(--royal-gold-dim);
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .royal-link:hover {
+            color: var(--royal-gold);
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+            text-decoration: underline;
+        }
+        .error-msg {
+            color: var(--royal-crimson);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.95rem; /* Increased */
+            text-align: center;
+            margin-top: 0.6rem;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <div class="bg-pattern"></div>
+
+    <!-- Decorative Elements -->
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
+    <main class="signup-card">
+        <h1>ADMIN</h1>
+        
+        <form action="/admin/login" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your titled name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="messenger@realm.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Secret Cipher</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+           <% if (err && err.length > 0) { %>
+                <p class="error-msg"><%=err %></p>
+            <% } %>
+
+            <button type="submit" class="btn-ascend">Crown Access</button>
+        </form>
+
+    </main>
+
+</body>
+</html>
