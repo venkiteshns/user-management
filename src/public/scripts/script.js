@@ -6,7 +6,7 @@ window.addEventListener("pageshow", (event) => {
 
     console.log('cache type : ',performance.getEntriesByType("navigation")[0].type,"---- :",isbackward_forward);
     
-  if (event.persisted || isbackward_forward) {
+  if (isbackward_forward) {
     console.log("event status : ",event.persisted);
     
     window.location.reload();

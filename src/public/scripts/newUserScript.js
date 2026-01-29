@@ -1,10 +1,7 @@
 // Script for handling backward and forward cache
 
 window.addEventListener("pageshow", (event) => {
-  if (
-    event.persisted ||
-    (window.performance && window.performance.navigation.type === 2)
-  ) {
+  if (window.performance && window.performance.navigation.type === 2) {
     window.location.reload();
   }
 });
