@@ -2,6 +2,8 @@ import { createUser, getUserData, loginUser } from "../services/userServices.js"
 import { createToken } from "../utils/jwtHelper.js";
 
 export const renderSignup = (req, res) => {
+  console.log("render sign up");
+  
   return res.render("user/signup", { err: null });
 };
 
@@ -30,14 +32,12 @@ export const renderLogin = (req, res) => {
 export const userLogin = async (req, res) => {
   let user = await loginUser(req.body);
   if (user) {
-    console.log("user login", user);
-
     if (user.role != "User") {
       return res.render("user/login", { err: "Only users are alowded !"});
     }
     //1 creating token
     const auth_token = createToken(user);
-
+    
     //2 cookie response
     res.cookie("user_access_token", auth_token, {
       httpOnly: true,
@@ -54,7 +54,6 @@ export const userLogin = async (req, res) => {
 
 export const renderDashboard = async (req, res) => {
   let user = await getUserData(req.cookies.user_access_token)
-  console.log(user);
   if(!user){
     res.clearCookie("admin_access_token");
     return res.redirect("/");
@@ -67,5 +66,6 @@ export const renderDashboard = async (req, res) => {
 
 export const logoutPage = (req, res) => {
   res.clearCookie("user_access_token");
-  res.redirect("/login");
+  res.set('Cache-Control', 'no-store');
+  res.redirect("/");
 }

@@ -16,29 +16,20 @@ import { authAdmin, verifyAdminToken } from "../middlewares/adminMiddleware.js";
 
 const route = express.Router();
 
-route.get("/", authAdmin, cacheClear, renderAdminLogin);
+route.get("/", authAdmin, renderAdminLogin);
 
-route.get("/login", authAdmin, cacheClear, renderAdminLogin);
+route.get("/login", authAdmin, renderAdminLogin);
 
-route.post("/login", cacheClear, adminLogin);
+route.post("/login", adminLogin);
 
-route.get(
-  "/admin_dashboard",
-  verifyAdminToken,
-  cacheClear,
-  renderAdminDashboard,
-);
+//Protected routes
+route.get("/admin_dashboard", verifyAdminToken, cacheClear, renderAdminDashboard,);
 
 route.get("/add_user", cacheClear, verifyAdminToken, renderNewUserForm);
 
 route.post("/add_user", cacheClear, verifyAdminToken, addNewUser);
 
-route.post(
-  "/edit_user_details/:id",
-  cacheClear,
-  verifyAdminToken,
-  renderEditUserForm,
-);
+route.post( "/edit_user_details/:id", cacheClear, verifyAdminToken, renderEditUserForm );
 
 route.post("/edit_user/:id", cacheClear, verifyAdminToken, editUser);
 
@@ -49,3 +40,4 @@ route.post("/filter", verifyAdminToken, filterdata);
 route.get("/logout", cacheClear, adminLogout);
 
 export default route;
+ 

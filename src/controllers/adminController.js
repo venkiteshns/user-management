@@ -13,7 +13,6 @@ export const renderAdminLogin = (req, res) => {
 };
 
 export const adminLogin = async (req, res) => {
-  console.log(req.body);
 
   let adminInfo = await getAdminInfo(req.body);
 
@@ -39,7 +38,6 @@ export const renderAdminDashboard = async (req, res) => {
   const searchKey = req.query.search || "" ;
 
   let userList = await getUserList(searchKey);
-  console.log(userList);
   
   let admin = decodeToken(req.cookies.admin_access_token);
   let { username, email } = admin;
@@ -82,5 +80,6 @@ export const filterdata = async (req, res) => {
 
 export const adminLogout = (req, res) => {
   res.clearCookie("admin_access_token");
-  res.redirect("/admin/login");
+  res.set('Cache-Control', 'no-store');
+  res.redirect("/admin");
 };

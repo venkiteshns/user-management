@@ -32,8 +32,6 @@ export const getUserList = async (searchKey) => {
       username: { $regex: `${searchKey}`, $options: "i" },
       role:"User"
     });
-    console.log(userList);
-
   return userList;
 };
 
@@ -46,12 +44,8 @@ export const addUser = async ({ username, email, password }) => {
   //1 hashing password
   const hash = await encryptPassword(password);
   password = hash;
-  console.log(password);
-
   //2 checking user exixts or not
   let isUser = await User.findOne({ email });
-  console.log("isUser : ", isUser);
-
   if (isUser) {
     return "User already exists";
   }
@@ -82,8 +76,6 @@ export const editUserDetails = async (userId, user) => {
       { _id: userId },
       { $set: { username, email, role } },
     );
-    console.log(userInfo);
-
     return userInfo;
   } catch (error) {
     console.log(

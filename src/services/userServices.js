@@ -42,12 +42,10 @@ export const createUser = async (user) => {
 export const loginUser = async (user) => {
   const { username, email, password } = user;
   const dbUser = await User.findOne({ username, email });
-  console.log("user found db : ", dbUser);
   let isAccess = null;
   if (dbUser) {
     isAccess = await bcrypt.compare(password, dbUser.password);
   }
-  console.log("access ", isAccess);
   if (isAccess) {
     return dbUser;
   }

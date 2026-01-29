@@ -1,6 +1,18 @@
-// let errMsg = document.getElementById('errMsg');
+// Script for handling backward and forward cache
 
-// errMsg.innerText = "hello venkitesh ";
+window.addEventListener("pageshow", (event) => {
+  const isbackward_forward =
+    performance.getEntriesByType("navigation")[0].type === "back_forward";
+
+    console.log('cache type : ',performance.getEntriesByType("navigation")[0].type,"---- :",isbackward_forward);
+    
+  if (event.persisted || isbackward_forward) {
+    console.log("event status : ",event.persisted);
+    
+    window.location.reload();
+  }
+});
+// Script for handling backward and forward cache
 
 const username = document.getElementById("username");
 const email = document.getElementById("email");
@@ -24,35 +36,32 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-
-pIcon.addEventListener('click',() => {
-  if(password.type === 'password'){
-    password.type = 'text';
-  }else{
-    password.type = 'password'
+pIcon.addEventListener("click", () => {
+  if (password.type === "password") {
+    password.type = "text";
+  } else {
+    password.type = "password";
   }
-  
-  pShow.classList.toggle('show')
-  pShow.classList.toggle('hide')
-  
-  pHide.classList.toggle('hide')
-  pHide.classList.toggle('show')
-})
 
-cpIcon.addEventListener('click',() => {
-  if(cnfPassword.type === 'password'){
-    cnfPassword.type = 'text';
-  }else{
-    cnfPassword.type = 'password'
+  pShow.classList.toggle("show");
+  pShow.classList.toggle("hide");
+
+  pHide.classList.toggle("hide");
+  pHide.classList.toggle("show");
+});
+
+cpIcon.addEventListener("click", () => {
+  if (cnfPassword.type === "password") {
+    cnfPassword.type = "text";
+  } else {
+    cnfPassword.type = "password";
   }
-  cpShow.classList.toggle('show')
-  cpShow.classList.toggle('hide')
-  
-  cpHide.classList.toggle('hide')
-  cpHide.classList.toggle('show')
-})
+  cpShow.classList.toggle("show");
+  cpShow.classList.toggle("hide");
 
-
+  cpHide.classList.toggle("hide");
+  cpHide.classList.toggle("show");
+});
 
 //name validation
 function validateName() {
@@ -112,8 +121,7 @@ function confirmPassword() {
     return false;
   }
   if (cnf_pass != pass_text) {
-    errMsg.innerText =
-      "Password doesn't match";
+    errMsg.innerText = "Password doesn't match";
     return false;
   }
   errMsg.innerText = "";
@@ -130,7 +138,11 @@ cnfPassword.addEventListener("blur", confirmPassword);
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const isValid = validateName() && validateEmail() && validatePassword() && confirmPassword();
+  const isValid =
+    validateName() &&
+    validateEmail() &&
+    validatePassword() &&
+    confirmPassword();
 
   if (!isValid) {
     return;
