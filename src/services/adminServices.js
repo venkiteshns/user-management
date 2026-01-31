@@ -29,7 +29,7 @@ export const getAdminInfo = async (admin) => {
 export const getUserList = async (searchKey) => {
   let userList;
     userList = await User.find({
-      username: { $regex: `${searchKey}`, $options: "i" },
+      username: { $regex: `^${searchKey}`, $options: "i" },
       role:"User"
     });
   return userList;
