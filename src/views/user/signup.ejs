@@ -285,5 +285,12 @@
         <p class="footer-text">"By signing, thou agree to the eternal scrolls of our realm."</p>
     </main>
     <script src="scripts/script.js"></script>
+     <script>
+        window.addEventListener('pageshow',(event) => {
+            if(window.performance && window.performance.navigation.type === 2){
+                window.location.reload()
+            }
+        })
+     </script>
 </body>
 </html>

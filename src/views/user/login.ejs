@@ -255,6 +255,16 @@
                 window.location.reload()
             }
         })
+         const isbackward_forward =
+            performance.getEntriesByType("navigation")[0].type === "back_forward";
+
+            console.log('cache type : ',performance.getEntriesByType("navigation")[0].type,"---- :",isbackward_forward);
+            
+        if (isbackward_forward) {
+            console.log("event status : ",event.persisted);
+            
+            window.location.reload();
+        }
      </script>
 
 </body>

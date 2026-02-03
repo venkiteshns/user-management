@@ -29,6 +29,10 @@ export const renderLogin = (req, res) => {
   return res.render("user/login", { err: null });
 };
 
+export const defaultPage = (req,res) => {
+  res.redirect('/login')
+}
+
 export const userLogin = async (req, res) => {
   let user = await loginUser(req.body);
   if (user) {

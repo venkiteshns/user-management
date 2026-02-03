@@ -16,11 +16,11 @@ import { authAdmin, verifyAdminToken } from "../middlewares/adminMiddleware.js";
 
 const route = express.Router();
 
-route.get("/", authAdmin, renderAdminLogin);
+route.get("/", authAdmin, cacheClear, renderAdminLogin);
 
-route.get("/login", authAdmin, renderAdminLogin);
+route.get("/login", authAdmin, cacheClear, renderAdminLogin);
 
-route.post("/login", adminLogin);
+route.post("/login", cacheClear, adminLogin);
 
 //Protected routes
 route.get("/admin_dashboard", verifyAdminToken, cacheClear, renderAdminDashboard,);
